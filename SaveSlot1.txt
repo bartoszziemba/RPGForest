@@ -1,4 +1,4 @@
-200;200;Arnold;
-eq;;shortSword;;;
-inv;hpotion;;;;;;;;;;;;
-[0; 0; 0]
+170;200;Arnold;
+eq;;shortSword;;simpleHelmet;
+inv;hpotion;simpleBoots;;;;;;;;;;;
+[-2.100003; 1.732508; 0]
