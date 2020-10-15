@@ -12,9 +12,10 @@ namespace RPGItems
 eq;;shortSword;;;
 inv;hpotion;hpotion;simpleBoots;simpleChestplate;simpleHelmet;simpleCloak;;;;;;;";
         public static string defaultPlayer =
-    @"100;100;Arnold;
+    @"200;200;Arnold;
 eq;;shortSword;;;
-inv;hpotion;;;;;;;;;;;;";
+inv;hpotion;;;;;;;;;;;;
+[0; 0; 0]";
 
     }
     public static class HardcodedItems

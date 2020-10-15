@@ -14,10 +14,13 @@ public class PlayerComponent : MonoBehaviour
     UIManager uiManager;
 
     string heroName = "Arnold";
+    int baseArmor = 2;
+    int baseDamage = 2;
+
     int armor;
     int damage;
-    int health = 100;
-    int maxHp = 100;
+    int health = 200;
+    int maxHp = 200;
 
     float glowTime;
     bool inBush;
@@ -111,8 +114,8 @@ public class PlayerComponent : MonoBehaviour
     }
     void CalculateEquipementBonus()
     {
-        int armor = 0;
-        int strength = 1;
+        int armor = baseArmor;
+        int strength = baseDamage;
         foreach (var pair in equipment)
         {
             if (pair.Value != null)
@@ -153,6 +156,7 @@ public class PlayerComponent : MonoBehaviour
 
     public void Equip(EquipableItem it)
     {
+        print($"{it.type}");
         if (equipment[it.type] == null)
         {
             equipment[it.type] = it;
@@ -227,16 +231,21 @@ public class PlayerComponent : MonoBehaviour
             string[] tab = repr.Split('\n');
             string[] tabHp = tab[0].Split(';');
             health = int.Parse(tabHp[0]);
+            print("health OK");
             maxHp = int.Parse(tabHp[1]);
+            print("maxHp OK");
             heroName = tabHp[2];
 
             DeserializeEquipement(tab[1]);
+            print("Equipement OK");
             inventory.Deserialize(tab[2], this);
+            print("inventory OK");
             transform.position = new Misc.SerializableVector3(tab[3]);
+            print("position OK");
         }
-        catch(System.Exception)
+        catch(System.Exception e)
         {
-            Debug.LogError("Serialized player is corrupted");
+            Debug.LogError("Serialized player is corrupted " + e.Message);
         }
         RefreshHeroInfo();
 
@@ -263,7 +272,9 @@ public class PlayerComponent : MonoBehaviour
     }
     void DeserializeEquipement(string repr)
     {
+        print("starting deseriallize eq");
         InitializeEquipement();
+        print("eq initialized ");
 
         string[] items = repr.Split(';');
         repr = repr.TrimEnd(';');

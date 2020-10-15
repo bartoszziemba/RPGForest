@@ -86,6 +86,7 @@ public class SaveManager : MonoBehaviour
         {
             serializedPlayer = RPGItems.HardcodedPlayers.defaultPlayer;
         }
+        Debug.Log(serializedPlayer);
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerComponent>().Deserialize(serializedPlayer);
         SaveManager.EnableInput();
     }
@@ -109,7 +110,7 @@ public class SaveManager : MonoBehaviour
 
     public void NewGame(int slot)
     {
-        System.IO.File.WriteAllText(GeneratePath(slot), string.Empty);
+        System.IO.File.WriteAllText(GeneratePath(slot), RPGItems.HardcodedPlayers.defaultPlayer);
         LoadGame(slot);
     }
     public static void InitializeSaveSystem()
@@ -119,7 +120,7 @@ public class SaveManager : MonoBehaviour
         {
             System.IO.File.Create(GeneratePath(i));
         }
-        
+        System.IO.File.WriteAllText("DefaultPlayer.txt",RPGItems.HardcodedPlayers.defaultPlayer);
     }
 
 
